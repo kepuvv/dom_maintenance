@@ -1,7 +1,7 @@
 @echo off
 
 SET db="br_portal.nsf"
-SET path_to_db="E:\IBM\Domino\Referentbr3\"
+SET path_to_db="E:\IBM\Domino\ReferentBR3\"
 
 REM Start fixup
 echo Starting fixup on database %db%...
