@@ -5,17 +5,20 @@ SET path_to_db="E:\IBM\Domino\ReferentBR3\"
 SET IBM_path="C:\IBM\Domino\"
 
 REM Check if Domino Services still running
-SET services[0]=
-SET services[1]=
-SET services[2]=
+SETLOCAL enabledelayedexpansion
 
-for /l %%i in (0,1,2) do (
+SET services[0]=4game-service
+SET services[1]=AppMgmt
+SET services[2]=Audiosrv
+
+FOR /l %%i in (0,1,2) do (
 	SC QUERY !services[%%i]! | FIND "STOPPED" > NUL
-                IF errorlevel 1 (
-                ECHO %%i is still running.
-                EXIT /b 1)
-                pause
+        IF errorlevel 1 (
+        ECHO !services[%%i]! is still running.
+        EXIT /b 1
+		)
     )
+ENDLOCAL
 
 REM Start maintenance
 
