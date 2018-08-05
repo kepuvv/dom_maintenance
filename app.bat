@@ -1,15 +1,15 @@
 @ECHO off
+SETLOCAL enabledelayedexpansion
 
 SET db="br_portal.nsf"
 SET path_to_db="E:\IBM\Domino\ReferentBR3\"
 SET IBM_path="C:\IBM\Domino\"
 
-REM Check if Domino Services still running
-SETLOCAL enabledelayedexpansion
-
 SET services[0]=4game-service
 SET services[1]=AppMgmt
 SET services[2]=Audiosrv
+
+REM Check if Domino Services still running
 
 FOR /l %%i in (0,1,2) do (
 	SC QUERY !services[%%i]! | FIND "STOPPED" > NUL
@@ -18,7 +18,6 @@ FOR /l %%i in (0,1,2) do (
         EXIT /b 1
 		)
     )
-ENDLOCAL
 
 REM Start maintenance
 
