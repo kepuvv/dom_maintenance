@@ -1,0 +1,16 @@
+http://www-10.lotus.com/ldd/nd85forum.nsf/DateAllFlatWeb/46ff262d5424954185257f1800272750?OpenDocument
+
+START C:\Lotus\Domino\nserver.exe -q
+timeout 60
+START net stop "Lotus Domino Server (CLotusDominodata)"
+START net stop "Lotus Domino Diagnostics (CLotusDomino)"
+timeout 30
+
+cd C:\Lotus\Domino
+nsd -kill
+timeout 30
+
+robocopy C:\Lotus C:\LOTUSBACKUP /MIR /log:C:\logs\robocopy_domino.log
+timeout 10
+net start "Lotus Domino Diagnostics (CLotusDomino)"
+net start "Lotus Domino Server (CLotusDominoData)"
