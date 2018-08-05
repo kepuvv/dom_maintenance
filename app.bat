@@ -9,13 +9,13 @@ SET services[0]=
 SET services[1]=
 SET services[2]=
 
-(for %%SvcName in (%services%) do (
-	SC QUERY "%SvcName%" | FIND "STOPPED" > NUL
+for /l %%i in (0,1,2) do (
+	SC QUERY !services[%%i]! | FIND "STOPPED" > NUL
                 IF errorlevel 1 (
-                ECHO "%SvcName%" is still running.
+                ECHO %%i is still running.
                 EXIT /b 1)
+                pause
     )
-)
 
 REM Start maintenance
 
