@@ -1,7 +1,22 @@
-@echo off
+@ECHO off
 
 SET db="br_portal.nsf"
 SET path_to_db="E:\IBM\Domino\ReferentBR3\"
+
+REM Check if Domino Services still running
+SET services[0]=
+SET services[1]=
+SET services[2]=
+
+(for %%SvcName in (%services%) do (
+	SC QUERY "%SvcName%" | FIND "STOPPED" > NUL
+                IF errorlevel 1 (
+                ECHO "%SvcName%" is still running.
+                EXIT /b 1)
+    )
+)
+
+REM Start maintenance
 
 REM Start fixup
 echo Starting fixup on database %db%...
