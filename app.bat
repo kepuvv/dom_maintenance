@@ -5,6 +5,7 @@ SET db="br_portal.nsf"
 SET path_to_db="E:\IBM\Domino\ReferentBR3\"
 SET IBM_path="C:\IBM\Domino\"
 
+REM Set Domino services
 SET services[0]=4game-service
 SET services[1]=AppMgmt
 SET services[2]=Audiosrv
