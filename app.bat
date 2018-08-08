@@ -1,14 +1,14 @@
 @ECHO off
 SETLOCAL enabledelayedexpansion
 
-SET db="br_portal.nsf"
-SET path_to_db="E:\IBM\Domino\ReferentBR3\"
-SET IBM_path="C:\IBM\Domino\"
+SET db=
+SET path_to_db=
+SET IBM_path=
 
 REM Set Domino services
-SET services[0]=4game-service
-SET services[1]=AppMgmt
-SET services[2]=Audiosrv
+SET services[0]=
+SET services[1]=
+SET services[2]=
 
 REM Check if Domino Services still running
 
@@ -16,6 +16,7 @@ FOR /l %%i in (0,1,2) do (
 	SC QUERY !services[%%i]! | FIND "STOPPED" > NUL
         IF errorlevel 1 (
         ECHO !services[%%i]! is still running.
+        PAUSE
         EXIT /b 1
 		)
     )
@@ -23,18 +24,18 @@ FOR /l %%i in (0,1,2) do (
 REM Start maintenance
 
 REM Start fixup
-echo Starting fixup on database "%db%"...
-"%IBM_path%"nfixup.exe -F -J "%path_to_db%""%db%"
-echo Fixup on database "%db%" completed.
+ECHO Starting fixup on database %db%...
+%IBM_path%nfixup.exe -F -J %path_to_db%%db%
+ECHO Fixup on database %db% completed.
 
 REM Start updall
-echo Starting updall on database %db%...
-"%IBM_path%"nupdall.exe -X "%path_to_db%""%db%"
-echo Updall on database "%db%" completed.
+ECHO Starting updall on database %db%...
+%IBM_path%nupdall.exe -X %path_to_db%%db%
+ECHO Updall on database %db% completed.
 
 REM Start compact
-echo Starting compact on database %db%...
-"%IBM_path%"ncompact.exe -b "%path_to_db%""%db%"
-echo Compact on database "%db%" completed.
+ECHO Starting compact on database %db%...
+%IBM_path%ncompact.exe -b %path_to_db%%db%
+ECHO Compact on database %db% completed.
 
-pause
+PAUSE
